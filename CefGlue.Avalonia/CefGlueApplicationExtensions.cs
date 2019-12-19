@@ -1,5 +1,5 @@
-﻿using Avalonia.Controls;
-using System;
+﻿using System;
+using Avalonia.Controls;
 using Xilium.CefGlue;
 
 namespace CefGlue.Avalonia
@@ -8,35 +8,19 @@ namespace CefGlue.Avalonia
     {
         public static T ConfigureCefGlue<T>(this T builder, string[] args) where T : AppBuilderBase<T>, new()
         {
-            return builder.AfterSetup((b) =>
+            return builder.AfterSetup(b =>
             {
-                try
-                {
-                    CefRuntime.Load();
-                }
-                catch (DllNotFoundException ex)
-                {
-
-                }
-                catch (CefRuntimeException ex)
-                {
-
-                }
-                catch (Exception ex)
-                {
-
-                }
-
+                CefRuntime.Load();
                 var mainArgs = new CefMainArgs(args);
                 var cefApp = new SampleCefApp();
                 cefApp.RegisterCustomSchemes += CefApp_RegisterCustomSchemes;
                 cefApp.WebKitInitialized += CefApp_WebKitInitialized;
 
-                var exitCode = CefRuntime.ExecuteProcess(mainArgs, cefApp);
-                if (exitCode != -1) { return; }
-
-                var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-                var directory = System.IO.Path.GetDirectoryName(location);
+                var exitCode = CefRuntime.ExecuteProcess(mainArgs, cefApp, IntPtr.Zero);
+                if (exitCode != -1)
+                {
+                    return;
+                }
 
                 var cefSettings = new CefSettings
                 {
@@ -48,14 +32,8 @@ namespace CefGlue.Avalonia
                     ExternalMessagePump = true
                 };
 
-                try
-                {
-                    CefRuntime.Initialize(mainArgs, cefSettings, cefApp);
-                }
-                catch (CefRuntimeException ex)
-                {
 
-                }
+                CefRuntime.Initialize(mainArgs, cefSettings, cefApp, IntPtr.Zero);
             });
         }
 

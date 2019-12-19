@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xilium.CefGlue;
 
 namespace CefGlue.Avalonia
@@ -12,7 +10,7 @@ namespace CefGlue.Avalonia
             Registrar = register;
         }
 
-        public CefSchemeRegistrar Registrar { get; private set; }
+        public CefSchemeRegistrar Registrar { get; }
     }
 
     public delegate void RegisterCustomSchemesHandler(object sender, RegisterCustomSchemesEventArgs e);

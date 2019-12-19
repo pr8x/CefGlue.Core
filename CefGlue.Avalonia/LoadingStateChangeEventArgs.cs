@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CefGlue.Avalonia
 {
     public class LoadingStateChangeEventArgs : EventArgs
     {
-        public bool IsLoading { get; private set; }
-        public bool CanGoBack { get; private set; }
-        public bool CanGoForward { get; private set; }
-
         public LoadingStateChangeEventArgs(bool isLoading, bool canGoBack, bool canGoForward)
         {
-            this.IsLoading = isLoading;
-            this.CanGoBack = canGoBack;
-            this.CanGoForward = canGoForward;
+            IsLoading = isLoading;
+            CanGoBack = canGoBack;
+            CanGoForward = canGoForward;
         }
+
+        public bool IsLoading { get; }
+        public bool CanGoBack { get; }
+        public bool CanGoForward { get; }
     }
 }

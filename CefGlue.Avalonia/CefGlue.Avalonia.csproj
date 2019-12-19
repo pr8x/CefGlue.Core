@@ -6,6 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -13,18 +14,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="AvaloniaCefBrowser.xaml" />
-    <None Remove="AvaloniaCefBrowserTheme.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AvaloniaCefBrowser.xaml" />
-    <EmbeddedResource Include="AvaloniaCefBrowserTheme.xaml" />
+    <AvaloniaResource Remove="AvaloniaCefJSAlert.xaml" />
+    <AvaloniaResource Remove="AvaloniaCefJSConfirm.xaml" />
+    <AvaloniaResource Remove="AvaloniaCefJSPrompt.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia">
-      <Version>0.8.1</Version>
+      <Version>0.9.999-cibuild0005383-beta</Version>
     </PackageReference>
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
@@ -33,4 +39,15 @@
     <ProjectReference Include="..\CefGlue\CefGlue.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="AvaloniaCefJSAlert.xaml.cs">
+      <DependentUpon>AvaloniaCefJSAlert.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AvaloniaCefJSConfirm.xaml.cs">
+      <DependentUpon>AvaloniaCefJSConfirm.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AvaloniaCefJSPrompt.xaml.cs">
+      <DependentUpon>AvaloniaCefJSPrompt.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

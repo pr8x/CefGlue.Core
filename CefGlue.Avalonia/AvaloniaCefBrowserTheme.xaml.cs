@@ -3,7 +3,7 @@ using Avalonia.Styling;
 
 namespace CefGlue.Avalonia
 {
-    class AvaloniaCefBrowserTheme : Styles
+    internal class AvaloniaCefBrowserTheme : Styles
     {
         public AvaloniaCefBrowserTheme()
         {
@@ -11,6 +11,3 @@ namespace CefGlue.Avalonia
         }
     }
 }
-
-
-

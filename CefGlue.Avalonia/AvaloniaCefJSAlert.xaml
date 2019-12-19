@@ -1,0 +1,17 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        x:Class="Xilium.CefGlue.Avalonia.AvaloniaCefJSAlert"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="JavaScript Alert" SizeToContent="WidthAndHeight" Topmost="True"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <Grid>
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom" Background="WhiteSmoke">
+                <Button DockPanel.Dock="Bottom" Content="Ok" Margin="10" Height="23" HorizontalAlignment="Right"
+                        Width="80" PointerPressed="OkButton_Click" />
+            </Grid>
+            <Grid DockPanel.Dock="Top" MinHeight="70" MinWidth="140">
+                <TextBlock Name="messageTextBlock" Margin="12" VerticalAlignment="Center" Text="Message" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

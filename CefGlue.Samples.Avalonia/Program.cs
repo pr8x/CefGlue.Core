@@ -2,13 +2,21 @@
 using CefGlue.Avalonia;
 
 namespace CefGlue.Samples.Avalonia
-{    
-    internal class Program
+{
+    internal static class Program
     {
-        static void Main(string[] args)
+        public static AppBuilder BuildAvaloniaApp()
         {
-            AppBuilder.Configure<App>()
-                .UsePlatformDetect().UseSkia().ConfigureCefGlue(args).Start<MainWindow>();
+            return AppBuilder
+                .Configure<App>()
+                .UsePlatformDetect();
+        }
+
+        public static int Main(string[] args)
+        {
+            return BuildAvaloniaApp()
+                .ConfigureCefGlue(args)
+                .StartWithClassicDesktopLifetime(args);
         }
     }
 }

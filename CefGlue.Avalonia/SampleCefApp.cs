@@ -5,12 +5,10 @@ namespace CefGlue.Avalonia
 {
     internal sealed class SampleCefApp : CefApp
     {
+        private CefBrowserProcessHandler _browserProcessHandler;
+
         public event EventHandler WebKitInitialized;
         public event RegisterCustomSchemesHandler RegisterCustomSchemes;
-
-        public SampleCefApp()
-        {
-        }
 
         protected override void OnBeforeCommandLineProcessing(string processType, CefCommandLine commandLine)
         {
@@ -23,16 +21,9 @@ namespace CefGlue.Avalonia
             }
         }
 
-        private CefBrowserProcessHandler _browserProcessHandler;
-
         protected override CefBrowserProcessHandler GetBrowserProcessHandler()
         {
-            if (_browserProcessHandler == null)
-            {
-                _browserProcessHandler = new AvaloniaCefBrowserProcessHandler();
-            }
-
-            return _browserProcessHandler;
+            return _browserProcessHandler ?? (_browserProcessHandler = new AvaloniaCefBrowserProcessHandler());
         }
 
         protected override CefRenderProcessHandler GetRenderProcessHandler()
@@ -42,7 +33,7 @@ namespace CefGlue.Avalonia
             return handler;
         }
 
-        private void Handler_WebKitInitialized(object sender, System.EventArgs e)
+        private void Handler_WebKitInitialized(object sender, EventArgs e)
         {
             WebKitInitialized?.Invoke(sender, e);
         }

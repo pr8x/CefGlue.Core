@@ -1,378 +1,28 @@
-﻿using Avalonia.Controls;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Avalonia;
-using Xilium.CefGlue;
-using Avalonia.Media.Imaging;
-using Avalonia.Threading;
-using Avalonia.Input;
-using Avalonia.VisualTree;
-using Avalonia.Controls.Primitives;
-using Avalonia.Media;
+﻿using System;
 using System.Runtime.InteropServices;
-using Avalonia.Platform;
-using System.Security;
-using System.Linq;
 using System.Threading.Tasks;
-using System.IO;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Threading;
+using Avalonia.VisualTree;
+using Xilium.CefGlue;
+
+#pragma warning disable 618
 
 namespace CefGlue.Avalonia
 {
     public static class KeyInterop
     {
-        partial class NativeMethods
-        {
-            public const int VK_CANCEL = 0x03;
-
-            public const int VK_BACK = 0x08;
-
-            public const int VK_CLEAR = 0x0C;
-
-            public const int VK_RETURN = 0x0D;
-
-            public const int VK_PAUSE = 0x13;
-
-            public const int VK_CAPITAL = 0x14;
-
-            public const int VK_KANA = 0x15;
-
-            public const int VK_HANGEUL = 0x15;
-
-            public const int VK_HANGUL = 0x15;
-
-            public const int VK_JUNJA = 0x17;
-
-            public const int VK_FINAL = 0x18;
-
-            public const int VK_HANJA = 0x19;
-
-            public const int VK_KANJI = 0x19;
-
-            public const int VK_ESCAPE = 0x1B;
-
-            public const int VK_CONVERT = 0x1C;
-
-            public const int VK_NONCONVERT = 0x1D;
-
-            public const int VK_ACCEPT = 0x1E;
-
-            public const int VK_MODECHANGE = 0x1F;
-
-            public const int VK_SPACE = 0x20;
-
-            public const int VK_PRIOR = 0x21;
-
-            public const int VK_NEXT = 0x22;
-
-            public const int VK_END = 0x23;
-
-            public const int VK_HOME = 0x24;
-
-            public const int VK_LEFT = 0x25;
-
-            public const int VK_UP = 0x26;
-
-            public const int VK_RIGHT = 0x27;
-
-            public const int VK_DOWN = 0x28;
-
-            public const int VK_SELECT = 0x29;
-
-            public const int VK_PRINT = 0x2A;
-
-            public const int VK_EXECUTE = 0x2B;
-
-            public const int VK_SNAPSHOT = 0x2C;
-
-            public const int VK_INSERT = 0x2D;
-
-            public const int VK_DELETE = 0x2E;
-
-            public const int VK_HELP = 0x2F;
-
-            public const int VK_0 = 0x30;
-
-            public const int VK_1 = 0x31;
-
-            public const int VK_2 = 0x32;
-
-            public const int VK_3 = 0x33;
-
-            public const int VK_4 = 0x34;
-
-            public const int VK_5 = 0x35;
-
-            public const int VK_6 = 0x36;
-
-            public const int VK_7 = 0x37;
-
-            public const int VK_8 = 0x38;
-
-            public const int VK_9 = 0x39;
-
-            public const int VK_A = 0x41;
-
-            public const int VK_B = 0x42;
-
-            public const int VK_C = 0x43;
-
-            public const int VK_D = 0x44;
-
-            public const int VK_E = 0x45;
-
-            public const int VK_F = 0x46;
-
-            public const int VK_G = 0x47;
-
-            public const int VK_H = 0x48;
-
-            public const int VK_I = 0x49;
-
-            public const int VK_J = 0x4A;
-
-            public const int VK_K = 0x4B;
-
-            public const int VK_L = 0x4C;
-
-            public const int VK_M = 0x4D;
-
-            public const int VK_N = 0x4E;
-
-            public const int VK_O = 0x4F;
-
-            public const int VK_P = 0x50;
-
-            public const int VK_Q = 0x51;
-
-            public const int VK_R = 0x52;
-
-            public const int VK_S = 0x53;
-
-            public const int VK_T = 0x54;
-
-            public const int VK_U = 0x55;
-
-            public const int VK_V = 0x56;
-
-            public const int VK_W = 0x57;
-
-            public const int VK_X = 0x58;
-
-            public const int VK_Y = 0x59;
-
-            public const int VK_Z = 0x5A;
-
-            public const int VK_LWIN = 0x5B;
-
-            public const int VK_RWIN = 0x5C;
-
-            public const int VK_APPS = 0x5D;
-
-            public const int VK_POWER = 0x5E;
-
-            public const int VK_SLEEP = 0x5F;
-
-            public const int VK_NUMPAD0 = 0x60;
-
-            public const int VK_NUMPAD1 = 0x61;
-
-            public const int VK_NUMPAD2 = 0x62;
-
-            public const int VK_NUMPAD3 = 0x63;
-
-            public const int VK_NUMPAD4 = 0x64;
-
-            public const int VK_NUMPAD5 = 0x65;
-
-            public const int VK_NUMPAD6 = 0x66;
-
-            public const int VK_NUMPAD7 = 0x67;
-
-            public const int VK_NUMPAD8 = 0x68;
-
-            public const int VK_NUMPAD9 = 0x69;
-
-            public const int VK_MULTIPLY = 0x6A;
-
-            public const int VK_ADD = 0x6B;
-
-            public const int VK_SEPARATOR = 0x6C;
-
-            public const int VK_SUBTRACT = 0x6D;
-
-            public const int VK_DECIMAL = 0x6E;
-
-            public const int VK_DIVIDE = 0x6F;
-
-            public const int VK_F1 = 0x70;
-
-            public const int VK_F2 = 0x71;
-
-            public const int VK_F3 = 0x72;
-
-            public const int VK_F4 = 0x73;
-
-            public const int VK_F5 = 0x74;
-
-            public const int VK_F6 = 0x75;
-
-            public const int VK_F7 = 0x76;
-
-            public const int VK_F8 = 0x77;
-
-            public const int VK_F9 = 0x78;
-
-            public const int VK_F10 = 0x79;
-
-            public const int VK_F11 = 0x7A;
-
-            public const int VK_F12 = 0x7B;
-
-            public const int VK_F13 = 0x7C;
-
-            public const int VK_F14 = 0x7D;
-
-            public const int VK_F15 = 0x7E;
-
-            public const int VK_F16 = 0x7F;
-
-            public const int VK_F17 = 0x80;
-
-            public const int VK_F18 = 0x81;
-
-            public const int VK_F19 = 0x82;
-
-            public const int VK_F20 = 0x83;
-
-            public const int VK_F21 = 0x84;
-
-            public const int VK_F22 = 0x85;
-
-            public const int VK_F23 = 0x86;
-
-            public const int VK_F24 = 0x87;
-
-            public const int VK_NUMLOCK = 0x90;
-
-            public const int VK_SCROLL = 0x91;
-
-
-            public const int VK_RSHIFT = 0xA1;
-
-            public const int VK_BROWSER_BACK = 0xA6;
-
-            public const int VK_BROWSER_FORWARD = 0xA7;
-
-            public const int VK_BROWSER_REFRESH = 0xA8;
-
-            public const int VK_BROWSER_STOP = 0xA9;
-
-            public const int VK_BROWSER_SEARCH = 0xAA;
-
-            public const int VK_BROWSER_FAVORITES = 0xAB;
-
-            public const int VK_BROWSER_HOME = 0xAC;
-
-            public const int VK_VOLUME_MUTE = 0xAD;
-
-            public const int VK_VOLUME_DOWN = 0xAE;
-
-            public const int VK_VOLUME_UP = 0xAF;
-
-            public const int VK_MEDIA_NEXT_TRACK = 0xB0;
-
-            public const int VK_MEDIA_PREV_TRACK = 0xB1;
-
-            public const int VK_MEDIA_STOP = 0xB2;
-
-            public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
-
-            public const int VK_LAUNCH_MAIL = 0xB4;
-
-            public const int VK_LAUNCH_MEDIA_SELECT = 0xB5;
-
-            public const int VK_LAUNCH_APP1 = 0xB6;
-
-            public const int VK_LAUNCH_APP2 = 0xB7;
-
-            public const int VK_PROCESSKEY = 0xE5;
-
-            public const int VK_PACKET = 0xE7;
-
-            public const int VK_ATTN = 0xF6;
-
-            public const int VK_CRSEL = 0xF7;
-
-            public const int VK_EXSEL = 0xF8;
-
-            public const int VK_EREOF = 0xF9;
-
-            public const int VK_PLAY = 0xFA;
-
-            public const int VK_ZOOM = 0xFB;
-
-            public const int VK_NONAME = 0xFC;
-
-            public const int VK_PA1 = 0xFD;
-
-            public const int VK_OEM_CLEAR = 0xFE;
-
-            public const int VK_TAB = 0x09;
-            public const int VK_SHIFT = 0x10;
-            public const int VK_CONTROL = 0x11;
-            public const int VK_MENU = 0x12;
-
-            public const int VK_LSHIFT = 0xA0;
-            public const int VK_RMENU = 0xA5;
-            public const int VK_LMENU = 0xA4;
-            public const int VK_LCONTROL = 0xA2;
-            public const int VK_RCONTROL = 0xA3;
-            public const int VK_LBUTTON = 0x01;
-            public const int VK_RBUTTON = 0x02;
-            public const int VK_MBUTTON = 0x04;
-            public const int VK_XBUTTON1 = 0x05;
-            public const int VK_XBUTTON2 = 0x06;
-
-            public const int VK_OEM_1 = 0xBA;
-            public const int VK_OEM_PLUS = 0xBB;
-            public const int VK_OEM_COMMA = 0xBC;
-            public const int VK_OEM_MINUS = 0xBD;
-            public const int VK_OEM_PERIOD = 0xBE;
-            public const int VK_OEM_2 = 0xBF;
-            public const int VK_OEM_3 = 0xC0;
-            public const int VK_C1 = 0xC1;   // Brazilian ABNT_C1 key (not defined in winuser.h).
-            public const int VK_C2 = 0xC2;   // Brazilian ABNT_C2 key (not defined in winuser.h).
-            public const int VK_OEM_4 = 0xDB;
-            public const int VK_OEM_5 = 0xDC;
-            public const int VK_OEM_6 = 0xDD;
-            public const int VK_OEM_7 = 0xDE;
-            public const int VK_OEM_8 = 0xDF;
-            public const int VK_OEM_AX = 0xE1;
-            public const int VK_OEM_102 = 0xE2;
-            public const int VK_OEM_RESET = 0xE9;
-            public const int VK_OEM_JUMP = 0xEA;
-            public const int VK_OEM_PA1 = 0xEB;
-            public const int VK_OEM_PA2 = 0xEC;
-            public const int VK_OEM_PA3 = 0xED;
-            public const int VK_OEM_WSCTRL = 0xEE;
-            public const int VK_OEM_CUSEL = 0xEF;
-            public const int VK_OEM_ATTN = 0xF0;
-            public const int VK_OEM_FINISH = 0xF1;
-            public const int VK_OEM_COPY = 0xF2;
-            public const int VK_OEM_AUTO = 0xF3;
-            public const int VK_OEM_ENLW = 0xF4;
-            public const int VK_OEM_BACKTAB = 0xF5;
-
-
-        }
-
         /// <summary>
         ///     Convert our Key enum into a Win32 VirtualKey.
         /// </summary>
         public static int VirtualKeyFromKey(Key key)
         {
-            int virtualKey = 0;
+            var virtualKey = 0;
 
             switch (key)
             {
@@ -992,59 +642,59 @@ namespace CefGlue.Avalonia
                     virtualKey = NativeMethods.VK_PROCESSKEY;
                     break;
 
-                case Key.OemAttn:                           // DbeAlphanumeric
+                case Key.OemAttn: // DbeAlphanumeric
                     virtualKey = NativeMethods.VK_OEM_ATTN; // VK_DBE_ALPHANUMERIC
                     break;
 
-                case Key.OemFinish:                           // DbeKatakana
+                case Key.OemFinish: // DbeKatakana
                     virtualKey = NativeMethods.VK_OEM_FINISH; // VK_DBE_KATAKANA
                     break;
 
-                case Key.OemCopy:                           // DbeHiragana
+                case Key.OemCopy: // DbeHiragana
                     virtualKey = NativeMethods.VK_OEM_COPY; // VK_DBE_HIRAGANA
                     break;
 
-                case Key.OemAuto:                           // DbeSbcsChar
+                case Key.OemAuto: // DbeSbcsChar
                     virtualKey = NativeMethods.VK_OEM_AUTO; // VK_DBE_SBCSCHAR
                     break;
 
-                case Key.OemEnlw:                           // DbeDbcsChar
+                case Key.OemEnlw: // DbeDbcsChar
                     virtualKey = NativeMethods.VK_OEM_ENLW; // VK_DBE_DBCSCHAR
                     break;
 
-                case Key.OemBackTab:                           // DbeRoman
+                case Key.OemBackTab: // DbeRoman
                     virtualKey = NativeMethods.VK_OEM_BACKTAB; // VK_DBE_ROMAN
                     break;
 
-                case Key.Attn:                          // DbeNoRoman
+                case Key.Attn: // DbeNoRoman
                     virtualKey = NativeMethods.VK_ATTN; // VK_DBE_NOROMAN
                     break;
 
-                case Key.CrSel:                          // DbeEnterWordRegisterMode
+                case Key.CrSel: // DbeEnterWordRegisterMode
                     virtualKey = NativeMethods.VK_CRSEL; // VK_DBE_ENTERWORDREGISTERMODE
                     break;
 
-                case Key.ExSel:                          // EnterImeConfigureMode
+                case Key.ExSel: // EnterImeConfigureMode
                     virtualKey = NativeMethods.VK_EXSEL; // VK_DBE_ENTERIMECONFIGMODE
                     break;
 
-                case Key.EraseEof:                       // DbeFlushString
+                case Key.EraseEof: // DbeFlushString
                     virtualKey = NativeMethods.VK_EREOF; // VK_DBE_FLUSHSTRING
                     break;
 
-                case Key.Play:                           // DbeCodeInput
-                    virtualKey = NativeMethods.VK_PLAY;  // VK_DBE_CODEINPUT
+                case Key.Play: // DbeCodeInput
+                    virtualKey = NativeMethods.VK_PLAY; // VK_DBE_CODEINPUT
                     break;
 
-                case Key.Zoom:                           // DbeNoCodeInput
-                    virtualKey = NativeMethods.VK_ZOOM;  // VK_DBE_NOCODEINPUT
+                case Key.Zoom: // DbeNoCodeInput
+                    virtualKey = NativeMethods.VK_ZOOM; // VK_DBE_NOCODEINPUT
                     break;
 
-                case Key.NoName:                          // DbeDetermineString
+                case Key.NoName: // DbeDetermineString
                     virtualKey = NativeMethods.VK_NONAME; // VK_DBE_DETERMINESTRING
                     break;
 
-                case Key.Pa1:                          // DbeEnterDlgConversionMode
+                case Key.Pa1: // DbeEnterDlgConversionMode
                     virtualKey = NativeMethods.VK_PA1; // VK_ENTERDLGCONVERSIONMODE
                     break;
 
@@ -1052,8 +702,8 @@ namespace CefGlue.Avalonia
                     virtualKey = NativeMethods.VK_OEM_CLEAR;
                     break;
 
-                case Key.DeadCharProcessed:             //This is usused.  It's just here for completeness.
-                    virtualKey = 0;                     //There is no Win32 VKey for this.
+                case Key.DeadCharProcessed: //This is usused.  It's just here for completeness.
+                    virtualKey = 0; //There is no Win32 VKey for this.
                     break;
 
                 default:
@@ -1064,6 +714,349 @@ namespace CefGlue.Avalonia
             return virtualKey;
         }
 
+        private static class NativeMethods
+        {
+            public const int VK_CANCEL = 0x03;
+
+            public const int VK_BACK = 0x08;
+
+            public const int VK_CLEAR = 0x0C;
+
+            public const int VK_RETURN = 0x0D;
+
+            public const int VK_PAUSE = 0x13;
+
+            public const int VK_CAPITAL = 0x14;
+
+            public const int VK_KANA = 0x15;
+
+            public const int VK_HANGEUL = 0x15;
+
+            public const int VK_HANGUL = 0x15;
+
+            public const int VK_JUNJA = 0x17;
+
+            public const int VK_FINAL = 0x18;
+
+            public const int VK_HANJA = 0x19;
+
+            public const int VK_KANJI = 0x19;
+
+            public const int VK_ESCAPE = 0x1B;
+
+            public const int VK_CONVERT = 0x1C;
+
+            public const int VK_NONCONVERT = 0x1D;
+
+            public const int VK_ACCEPT = 0x1E;
+
+            public const int VK_MODECHANGE = 0x1F;
+
+            public const int VK_SPACE = 0x20;
+
+            public const int VK_PRIOR = 0x21;
+
+            public const int VK_NEXT = 0x22;
+
+            public const int VK_END = 0x23;
+
+            public const int VK_HOME = 0x24;
+
+            public const int VK_LEFT = 0x25;
+
+            public const int VK_UP = 0x26;
+
+            public const int VK_RIGHT = 0x27;
+
+            public const int VK_DOWN = 0x28;
+
+            public const int VK_SELECT = 0x29;
+
+            public const int VK_PRINT = 0x2A;
+
+            public const int VK_EXECUTE = 0x2B;
+
+            public const int VK_SNAPSHOT = 0x2C;
+
+            public const int VK_INSERT = 0x2D;
+
+            public const int VK_DELETE = 0x2E;
+
+            public const int VK_HELP = 0x2F;
+
+            public const int VK_0 = 0x30;
+
+            public const int VK_1 = 0x31;
+
+            public const int VK_2 = 0x32;
+
+            public const int VK_3 = 0x33;
+
+            public const int VK_4 = 0x34;
+
+            public const int VK_5 = 0x35;
+
+            public const int VK_6 = 0x36;
+
+            public const int VK_7 = 0x37;
+
+            public const int VK_8 = 0x38;
+
+            public const int VK_9 = 0x39;
+
+            public const int VK_A = 0x41;
+
+            public const int VK_B = 0x42;
+
+            public const int VK_C = 0x43;
+
+            public const int VK_D = 0x44;
+
+            public const int VK_E = 0x45;
+
+            public const int VK_F = 0x46;
+
+            public const int VK_G = 0x47;
+
+            public const int VK_H = 0x48;
+
+            public const int VK_I = 0x49;
+
+            public const int VK_J = 0x4A;
+
+            public const int VK_K = 0x4B;
+
+            public const int VK_L = 0x4C;
+
+            public const int VK_M = 0x4D;
+
+            public const int VK_N = 0x4E;
+
+            public const int VK_O = 0x4F;
+
+            public const int VK_P = 0x50;
+
+            public const int VK_Q = 0x51;
+
+            public const int VK_R = 0x52;
+
+            public const int VK_S = 0x53;
+
+            public const int VK_T = 0x54;
+
+            public const int VK_U = 0x55;
+
+            public const int VK_V = 0x56;
+
+            public const int VK_W = 0x57;
+
+            public const int VK_X = 0x58;
+
+            public const int VK_Y = 0x59;
+
+            public const int VK_Z = 0x5A;
+
+            public const int VK_LWIN = 0x5B;
+
+            public const int VK_RWIN = 0x5C;
+
+            public const int VK_APPS = 0x5D;
+
+            public const int VK_POWER = 0x5E;
+
+            public const int VK_SLEEP = 0x5F;
+
+            public const int VK_NUMPAD0 = 0x60;
+
+            public const int VK_NUMPAD1 = 0x61;
+
+            public const int VK_NUMPAD2 = 0x62;
+
+            public const int VK_NUMPAD3 = 0x63;
+
+            public const int VK_NUMPAD4 = 0x64;
+
+            public const int VK_NUMPAD5 = 0x65;
+
+            public const int VK_NUMPAD6 = 0x66;
+
+            public const int VK_NUMPAD7 = 0x67;
+
+            public const int VK_NUMPAD8 = 0x68;
+
+            public const int VK_NUMPAD9 = 0x69;
+
+            public const int VK_MULTIPLY = 0x6A;
+
+            public const int VK_ADD = 0x6B;
+
+            public const int VK_SEPARATOR = 0x6C;
+
+            public const int VK_SUBTRACT = 0x6D;
+
+            public const int VK_DECIMAL = 0x6E;
+
+            public const int VK_DIVIDE = 0x6F;
+
+            public const int VK_F1 = 0x70;
+
+            public const int VK_F2 = 0x71;
+
+            public const int VK_F3 = 0x72;
+
+            public const int VK_F4 = 0x73;
+
+            public const int VK_F5 = 0x74;
+
+            public const int VK_F6 = 0x75;
+
+            public const int VK_F7 = 0x76;
+
+            public const int VK_F8 = 0x77;
+
+            public const int VK_F9 = 0x78;
+
+            public const int VK_F10 = 0x79;
+
+            public const int VK_F11 = 0x7A;
+
+            public const int VK_F12 = 0x7B;
+
+            public const int VK_F13 = 0x7C;
+
+            public const int VK_F14 = 0x7D;
+
+            public const int VK_F15 = 0x7E;
+
+            public const int VK_F16 = 0x7F;
+
+            public const int VK_F17 = 0x80;
+
+            public const int VK_F18 = 0x81;
+
+            public const int VK_F19 = 0x82;
+
+            public const int VK_F20 = 0x83;
+
+            public const int VK_F21 = 0x84;
+
+            public const int VK_F22 = 0x85;
+
+            public const int VK_F23 = 0x86;
+
+            public const int VK_F24 = 0x87;
+
+            public const int VK_NUMLOCK = 0x90;
+
+            public const int VK_SCROLL = 0x91;
+
+
+            public const int VK_RSHIFT = 0xA1;
+
+            public const int VK_BROWSER_BACK = 0xA6;
+
+            public const int VK_BROWSER_FORWARD = 0xA7;
+
+            public const int VK_BROWSER_REFRESH = 0xA8;
+
+            public const int VK_BROWSER_STOP = 0xA9;
+
+            public const int VK_BROWSER_SEARCH = 0xAA;
+
+            public const int VK_BROWSER_FAVORITES = 0xAB;
+
+            public const int VK_BROWSER_HOME = 0xAC;
+
+            public const int VK_VOLUME_MUTE = 0xAD;
+
+            public const int VK_VOLUME_DOWN = 0xAE;
+
+            public const int VK_VOLUME_UP = 0xAF;
+
+            public const int VK_MEDIA_NEXT_TRACK = 0xB0;
+
+            public const int VK_MEDIA_PREV_TRACK = 0xB1;
+
+            public const int VK_MEDIA_STOP = 0xB2;
+
+            public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
+
+            public const int VK_LAUNCH_MAIL = 0xB4;
+
+            public const int VK_LAUNCH_MEDIA_SELECT = 0xB5;
+
+            public const int VK_LAUNCH_APP1 = 0xB6;
+
+            public const int VK_LAUNCH_APP2 = 0xB7;
+
+            public const int VK_PROCESSKEY = 0xE5;
+
+            public const int VK_PACKET = 0xE7;
+
+            public const int VK_ATTN = 0xF6;
+
+            public const int VK_CRSEL = 0xF7;
+
+            public const int VK_EXSEL = 0xF8;
+
+            public const int VK_EREOF = 0xF9;
+
+            public const int VK_PLAY = 0xFA;
+
+            public const int VK_ZOOM = 0xFB;
+
+            public const int VK_NONAME = 0xFC;
+
+            public const int VK_PA1 = 0xFD;
+
+            public const int VK_OEM_CLEAR = 0xFE;
+
+            public const int VK_TAB = 0x09;
+            public const int VK_SHIFT = 0x10;
+            public const int VK_CONTROL = 0x11;
+            public const int VK_MENU = 0x12;
+
+            public const int VK_LSHIFT = 0xA0;
+            public const int VK_RMENU = 0xA5;
+            public const int VK_LMENU = 0xA4;
+            public const int VK_LCONTROL = 0xA2;
+            public const int VK_RCONTROL = 0xA3;
+            public const int VK_LBUTTON = 0x01;
+            public const int VK_RBUTTON = 0x02;
+            public const int VK_MBUTTON = 0x04;
+            public const int VK_XBUTTON1 = 0x05;
+            public const int VK_XBUTTON2 = 0x06;
+
+            public const int VK_OEM_1 = 0xBA;
+            public const int VK_OEM_PLUS = 0xBB;
+            public const int VK_OEM_COMMA = 0xBC;
+            public const int VK_OEM_MINUS = 0xBD;
+            public const int VK_OEM_PERIOD = 0xBE;
+            public const int VK_OEM_2 = 0xBF;
+            public const int VK_OEM_3 = 0xC0;
+            public const int VK_C1 = 0xC1; // Brazilian ABNT_C1 key (not defined in winuser.h).
+            public const int VK_C2 = 0xC2; // Brazilian ABNT_C2 key (not defined in winuser.h).
+            public const int VK_OEM_4 = 0xDB;
+            public const int VK_OEM_5 = 0xDC;
+            public const int VK_OEM_6 = 0xDD;
+            public const int VK_OEM_7 = 0xDE;
+            public const int VK_OEM_8 = 0xDF;
+            public const int VK_OEM_AX = 0xE1;
+            public const int VK_OEM_102 = 0xE2;
+            public const int VK_OEM_RESET = 0xE9;
+            public const int VK_OEM_JUMP = 0xEA;
+            public const int VK_OEM_PA1 = 0xEB;
+            public const int VK_OEM_PA2 = 0xEC;
+            public const int VK_OEM_PA3 = 0xED;
+            public const int VK_OEM_WSCTRL = 0xEE;
+            public const int VK_OEM_CUSEL = 0xEF;
+            public const int VK_OEM_ATTN = 0xF0;
+            public const int VK_OEM_FINISH = 0xF1;
+            public const int VK_OEM_COPY = 0xF2;
+            public const int VK_OEM_AUTO = 0xF3;
+            public const int VK_OEM_ENLW = 0xF4;
+            public const int VK_OEM_BACKTAB = 0xF5;
+        }
     }
 
     public class TaskStringVisitor : CefStringVisitor
@@ -1075,60 +1068,31 @@ namespace CefGlue.Avalonia
             taskCompletionSource = new TaskCompletionSource<string>();
         }
 
+        public Task<string> Task => taskCompletionSource.Task;
+
         protected override void Visit(string value)
         {
             taskCompletionSource.SetResult(value);
         }
-
-        public Task<string> Task
-        {
-            get { return taskCompletionSource.Task; }
-        }
     }
-
-    public static class CEFExtensions
-    {
-        public static Task<string> GetSourceAsync(this CefBrowser browser)
-        {
-            TaskStringVisitor taskStringVisitor = new TaskStringVisitor();
-            browser.GetMainFrame().GetSource(taskStringVisitor);
-            return taskStringVisitor.Task;
-        }
-    }
-
 
     public class AvaloniaCefBrowser : TemplatedControl
     {
-        private bool _disposed;
-        private bool _created;
-
-        private Image _browserPageImage;
+        private int _browserHeight;
+        private CefBrowserHost _browserHost;
 
         private WriteableBitmap _browserPageBitmap;
 
-        private int _browserWidth;
-        private int _browserHeight;
+        private Image _browserPageImage;
         private bool _browserSizeChanged;
 
-        private CefBrowser _browser;
-        private CefBrowserHost _browserHost;
-        private WpfCefClient _cefClient;
-
-        private ToolTip _tooltip;
-        private DispatcherTimer _tooltipTimer;
-
-        private Popup _popup;
-        private Image _popupImage;
-        private WriteableBitmap _popupImageBitmap;
-
+        private int _browserWidth;
+        private AvaloniaCefClient _cefClient;
+        private bool _created;
         private TaskCompletionSource<string> _messageReceiveCompletionSource;
-
         public string StartUrl { get; set; }
         public bool AllowsTransparency { get; set; }
-        public Key Keys { get; private set; }
-
-
-        public CefBrowser Browser => _browser;
+        public CefBrowser Browser { get; private set; }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
@@ -1141,103 +1105,119 @@ namespace CefGlue.Avalonia
         {
             var size = base.ArrangeOverride(arrangeBounds);
 
-            if (_browserPageImage != null)
+            if (_browserPageImage == null)
             {
-                var newWidth = (int)size.Width;
-                var newHeight = (int)size.Height;
+                return size;
+            }
 
-                if (newWidth > 0 && newHeight > 0)
+            var newWidth = (int) size.Width;
+            var newHeight = (int) size.Height;
+
+            if (newWidth <= 0 || newHeight <= 0)
+            {
+                return size;
+            }
+
+            if (!_created)
+            {
+                AttachEventHandlers(this); // TODO: ?
+
+                // Create the bitmap that holds the rendered website bitmap
+                _browserWidth = newWidth;
+                _browserHeight = newHeight;
+                _browserSizeChanged = true;
+
+                // Find the window that's hosting us                        
+
+                if (!(this.GetVisualRoot() is Window parentWnd))
                 {
-                    if (!_created)
-                    {
-                        AttachEventHandlers(this); // TODO: ?
-
-                        // Create the bitmap that holds the rendered website bitmap
-                        _browserWidth = newWidth;
-                        _browserHeight = newHeight;
-                        _browserSizeChanged = true;
-
-                        // Find the window that's hosting us                        
-                        Window parentWnd = this.GetVisualRoot() as Window;
-
-                        if (parentWnd != null)
-                        {
-
-                            IntPtr hParentWnd = parentWnd.PlatformImpl.Handle.Handle;
-
-                            var windowInfo = CefWindowInfo.Create();
-                            windowInfo.SetAsWindowless(hParentWnd, AllowsTransparency);
-
-                            var settings = new CefBrowserSettings();
-                            _cefClient = new WpfCefClient(this);
-
-                            _messageReceiveCompletionSource = new TaskCompletionSource<string>();
-
-                            _cefClient.MessageReceived += (sender, e) =>
-                            {
-                                if (e.Message.Name == "executeJsResult")
-                                {
-                                    _messageReceiveCompletionSource.SetResult(e.Message.Arguments.GetString(0));
-                                }
-                            };
-
-                            // This is the first time the window is being rendered, so create it.
-                            CefBrowserHost.CreateBrowser(windowInfo, _cefClient, settings, !string.IsNullOrEmpty(StartUrl) ? StartUrl : "about:blank");
-
-                            _created = true;
-                        }
-                    }
-                    else
-                    {
-                        // Only update the bitmap if the size has changed
-                        if (_browserPageBitmap == null || (_browserPageBitmap.PixelSize.Width != newWidth || _browserPageBitmap.PixelSize.Height != newHeight))
-                        {
-                            _browserWidth = newWidth;
-                            _browserHeight = newHeight;
-                            _browserSizeChanged = true;
-
-                            // If the window has already been created, just resize it
-                            if (_browserHost != null)
-                            {
-                                _browserHost.WasResized();
-                            }
-                        }
-                    }
+                    return size;
                 }
+
+                var hParentWnd = parentWnd.PlatformImpl.Handle.Handle;
+
+                var windowInfo = CefWindowInfo.Create();
+                windowInfo.SetAsWindowless(hParentWnd, AllowsTransparency);
+
+                var settings = new CefBrowserSettings();
+                _cefClient = new AvaloniaCefClient(this);
+
+                _messageReceiveCompletionSource = new TaskCompletionSource<string>();
+
+                _cefClient.MessageReceived += (sender, e) =>
+                {
+                    if (e.Message.Name == "executeJsResult")
+                    {
+                        _messageReceiveCompletionSource.SetResult(e.Message.Arguments.GetString(0));
+                    }
+                };
+
+                // This is the first time the window is being rendered, so create it.
+                CefBrowserHost.CreateBrowser(windowInfo, _cefClient, settings,
+                    !string.IsNullOrEmpty(StartUrl) ? StartUrl : "about:blank");
+
+                _created = true;
+            }
+            else
+            {
+                // Only update the bitmap if the size has changed
+                if (_browserPageBitmap != null && _browserPageBitmap.PixelSize.Width == newWidth &&
+                    _browserPageBitmap.PixelSize.Height == newHeight)
+                {
+                    return size;
+                }
+
+                _browserWidth = newWidth;
+                _browserHeight = newHeight;
+                _browserSizeChanged = true;
+
+                // If the window has already been created, just resize it
+                _browserHost?.WasResized();
             }
 
             return size;
-
         }
 
         private static CefEventFlags GetKeyboardModifiers(InputModifiers kbModifiers)
         {
-            CefEventFlags modifiers = new CefEventFlags();
+            var modifiers = new CefEventFlags();
 
             if (kbModifiers == InputModifiers.Alt)
+            {
                 modifiers |= CefEventFlags.AltDown;
+            }
 
             if (kbModifiers == InputModifiers.Control)
+            {
                 modifiers |= CefEventFlags.ControlDown;
+            }
 
             if (kbModifiers == InputModifiers.Shift)
+            {
                 modifiers |= CefEventFlags.ShiftDown;
+            }
 
             return modifiers;
         }
 
         private static CefEventFlags GetMouseModifiers(InputModifiers mouseModifiers)
         {
-            CefEventFlags modifiers = new CefEventFlags();
+            var modifiers = new CefEventFlags();
 
             if (mouseModifiers == InputModifiers.LeftMouseButton)
+            {
                 modifiers |= CefEventFlags.LeftMouseButton;
+            }
 
             if (mouseModifiers == InputModifiers.MiddleMouseButton)
+            {
                 modifiers |= CefEventFlags.MiddleMouseButton;
+            }
 
             if (mouseModifiers == InputModifiers.RightMouseButton)
+            {
                 modifiers |= CefEventFlags.RightMouseButton;
+            }
 
             return modifiers;
         }
@@ -1248,14 +1228,10 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
-                    {
-                        _browserHost.SendFocusEvent(true);
-                    }
+                    _browserHost?.SendFocusEvent(true);
                 }
-                catch (Exception ex)
+                catch
                 {
-
                 }
             };
 
@@ -1263,14 +1239,10 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
-                    {
-                        _browserHost.SendFocusEvent(false);
-                    }
+                    _browserHost?.SendFocusEvent(false);
                 }
-                catch (Exception ex)
+                catch
                 {
-
                 }
             };
 
@@ -1278,23 +1250,22 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
+                    if (_browserHost == null)
                     {
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = 0,
-                            Y = 0
-                        };
-
-                        mouseEvent.Modifiers = GetMouseModifiers(arg.InputModifiers);
-
-                        _browserHost.SendMouseMoveEvent(mouseEvent, true);
-                        //_logger.Debug("Browser_MouseLeave");
+                        return;
                     }
-                }
-                catch (Exception ex)
-                {
 
+                    var mouseEvent = new CefMouseEvent
+                    {
+                        X = 0,
+                        Y = 0,
+                        Modifiers = GetMouseModifiers(arg.InputModifiers)
+                    };
+
+                    _browserHost.SendMouseMoveEvent(mouseEvent, true);
+                }
+                catch
+                {
                 }
             };
 
@@ -1302,26 +1273,24 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
+                    if (_browserHost == null)
                     {
-                        Point cursorPos = arg.GetPosition(this);
-
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y
-                        };
-
-                        mouseEvent.Modifiers = GetMouseModifiers(arg.InputModifiers);
-
-                        _browserHost.SendMouseMoveEvent(mouseEvent, false);
-
-                        //_logger.Debug(string.Format("Browser_MouseMove: ({0},{1})", cursorPos.X, cursorPos.Y));
+                        return;
                     }
-                }
-                catch (Exception ex)
-                {
 
+                    var cursorPos = arg.GetPosition(this);
+
+                    var mouseEvent = new CefMouseEvent
+                    {
+                        X = (int) cursorPos.X,
+                        Y = (int) cursorPos.Y,
+                        Modifiers = GetMouseModifiers(arg.InputModifiers)
+                    };
+
+                    _browserHost.SendMouseMoveEvent(mouseEvent, false);
+                }
+                catch
+                {
                 }
             };
 
@@ -1329,33 +1298,41 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
+                    if (_browserHost == null)
                     {
-                        Focus();
+                        return;
+                    }
 
-                        Point cursorPos = arg.GetPosition(this);
+                    Focus();
 
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y,
-                        };
+                    var cursorPos = arg.GetPosition(this);
 
-                        mouseEvent.Modifiers = GetMouseModifiers(arg.InputModifiers);
+                    var mouseEvent = new CefMouseEvent
+                    {
+                        X = (int) cursorPos.X,
+                        Y = (int) cursorPos.Y,
+                        Modifiers = GetMouseModifiers(arg.InputModifiers)
+                    };
 
-                        if (arg.MouseButton == MouseButton.Left)
-                            _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Left, false, arg.ClickCount);
-                        else if (arg.MouseButton == MouseButton.Middle)
-                            _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Middle, false, arg.ClickCount);
-                        else if (arg.MouseButton == MouseButton.Right)
-                            _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Right, false, arg.ClickCount);
 
-                        //_logger.Debug(string.Format("Browser_MouseDown: ({0},{1})", cursorPos.X, cursorPos.Y));
+                    if (arg.MouseButton == MouseButton.Left)
+                    {
+                        _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Left, false,
+                            arg.ClickCount);
+                    }
+                    else if (arg.MouseButton == MouseButton.Middle)
+                    {
+                        _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Middle, false,
+                            arg.ClickCount);
+                    }
+                    else if (arg.MouseButton == MouseButton.Right)
+                    {
+                        _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Right, false,
+                            arg.ClickCount);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-
                 }
             };
 
@@ -1365,29 +1342,33 @@ namespace CefGlue.Avalonia
                 {
                     if (_browserHost != null)
                     {
-                        Point cursorPos = arg.GetPosition(this);
+                        var cursorPos = arg.GetPosition(this);
 
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
+                        var mouseEvent = new CefMouseEvent
                         {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y,
+                            X = (int) cursorPos.X,
+                            Y = (int) cursorPos.Y,
+                            Modifiers = GetMouseModifiers(arg.InputModifiers)
                         };
 
-                        mouseEvent.Modifiers = GetMouseModifiers(arg.InputModifiers);
+                        var pointerPoint = arg.GetCurrentPoint(this);
 
-                        if (arg.MouseButton == MouseButton.Left)
+                        if (pointerPoint.Properties.IsLeftButtonPressed)
+                        {
                             _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Left, true, 1);
-                        else if (arg.MouseButton == MouseButton.Middle)
+                        }
+                        else if (pointerPoint.Properties.IsMiddleButtonPressed)
+                        {
                             _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Middle, true, 1);
-                        else if (arg.MouseButton == MouseButton.Right)
+                        }
+                        else if (pointerPoint.Properties.IsRightButtonPressed)
+                        {
                             _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Right, true, 1);
-
-                        //_logger.Debug(string.Format("Browser_MouseUp: ({0},{1})", cursorPos.X, cursorPos.Y));
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //_logger.ErrorException("WpfCefBrowser: Caught exception in MouseUp()", ex);
                 }
             };
 
@@ -1395,22 +1376,23 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
+                    if (_browserHost == null)
                     {
-                        Point cursorPos = arg.GetPosition(this);
-
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y,
-                        };
-
-                        _browserHost.SendMouseWheelEvent(mouseEvent, 0, (int)arg.Delta.Y);
+                        return;
                     }
+
+                    var cursorPos = arg.GetPosition(this);
+
+                    var mouseEvent = new CefMouseEvent
+                    {
+                        X = (int) cursorPos.X,
+                        Y = (int) cursorPos.Y
+                    };
+
+                    _browserHost.SendMouseWheelEvent(mouseEvent, 0, (int) arg.Delta.Y);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //_logger.ErrorException("WpfCefBrowser: Caught exception in MouseWheel()", ex);
                 }
             };
 
@@ -1421,11 +1403,11 @@ namespace CefGlue.Avalonia
                 {
                     foreach (var c in arg.Text)
                     {
-                        CefKeyEvent keyEvent = new CefKeyEvent()
+                        var keyEvent = new CefKeyEvent
                         {
                             EventType = CefKeyEventType.Char,
-                            WindowsKeyCode = (int)c,
-                            Character = c,
+                            WindowsKeyCode = c,
+                            Character = c
                         };
 
                         //keyEvent.Modifiers = GetKeyboardModifiers(KeyboardDevice.Instance.);
@@ -1442,33 +1424,31 @@ namespace CefGlue.Avalonia
             {
                 try
                 {
-                    if (_browserHost != null)
+                    if (_browserHost == null)
                     {
-                        //_logger.Debug(string.Format("KeyDown: system key {0}, key {1}", arg.SystemKey, arg.Key));
-                        CefKeyEvent keyEvent = new CefKeyEvent()
-                        {
-                            EventType = CefKeyEventType.RawKeyDown,
-                            WindowsKeyCode = KeyInterop.VirtualKeyFromKey(arg.Key),
-                            NativeKeyCode = 0,
-                            IsSystemKey = arg.Key == Key.System,
-                        };
-
-                        if (arg.Key == Key.Enter)
-                        {
-                            keyEvent.EventType = CefKeyEventType.Char;
-                        }
-
-                        keyEvent.Modifiers = GetKeyboardModifiers(arg.Modifiers);
-
-                        _browserHost.SendKeyEvent(keyEvent);
+                        return;
                     }
-                }
-                catch (Exception ex)
-                {
-                    //_logger.ErrorException("WpfCefBrowser: Caught exception in PreviewKeyDown()", ex);
-                }
 
-                //arg.Handled = HandledKeys.Contains(arg.Key);
+                    var keyEvent = new CefKeyEvent
+                    {
+                        EventType = CefKeyEventType.RawKeyDown,
+                        WindowsKeyCode = KeyInterop.VirtualKeyFromKey(arg.Key),
+                        NativeKeyCode = 0,
+                        IsSystemKey = arg.Key == Key.System
+                    };
+
+                    if (arg.Key == Key.Enter)
+                    {
+                        keyEvent.EventType = CefKeyEventType.Char;
+                    }
+
+                    keyEvent.Modifiers = GetKeyboardModifiers(arg.Modifiers);
+
+                    _browserHost.SendKeyEvent(keyEvent);
+                }
+                catch
+                {
+                }
             };
 
             // TODO: require more intelligent processing
@@ -1478,126 +1458,24 @@ namespace CefGlue.Avalonia
                 {
                     if (_browserHost != null)
                     {
-                        //_logger.Debug(string.Format("KeyUp: system key {0}, key {1}", arg.SystemKey, arg.Key));
-                        CefKeyEvent keyEvent = new CefKeyEvent()
+                        var keyEvent = new CefKeyEvent
                         {
                             EventType = CefKeyEventType.KeyUp,
                             WindowsKeyCode = KeyInterop.VirtualKeyFromKey(arg.Key),
                             NativeKeyCode = 0,
                             IsSystemKey = arg.Key == Key.System,
+                            Modifiers = GetKeyboardModifiers(arg.Modifiers)
                         };
-
-                        keyEvent.Modifiers = GetKeyboardModifiers(arg.Modifiers);
 
                         _browserHost.SendKeyEvent(keyEvent);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //_logger.ErrorException("WpfCefBrowser: Caught exception in PreviewKeyUp()", ex);
                 }
 
                 arg.Handled = true;
-
-                var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-                var directory = System.IO.Path.GetDirectoryName(location);
             };
-
-            /*browser._popup.MouseMove += (sender, arg) =>
-            {
-                try
-                {
-                    if (_browserHost != null)
-                    {
-                        Point cursorPos = arg.GetPosition(this);
-
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y
-                        };
-
-                        mouseEvent.Modifiers = GetMouseModifiers();
-
-                        _browserHost.SendMouseMoveEvent(mouseEvent, false);
-
-                        //_logger.Debug(string.Format("Popup_MouseMove: ({0},{1})", cursorPos.X, cursorPos.Y));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorException("WpfCefBrowser: Caught exception in Popup.MouseMove()", ex);
-                }
-            };
-
-            browser._popup.MouseDown += (sender, arg) =>
-            {
-                try
-                {
-                    if (_browserHost != null)
-                    {
-                        Point cursorPos = arg.GetPosition(this);
-
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y
-                        };
-
-                        mouseEvent.Modifiers = GetMouseModifiers();
-
-                        _browserHost.SendMouseClickEvent(mouseEvent, CefMouseButtonType.Left, true, 1);
-
-                        //_logger.Debug(string.Format("Popup_MouseDown: ({0},{1})", cursorPos.X, cursorPos.Y));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorException("WpfCefBrowser: Caught exception in Popup.MouseDown()", ex);
-                }
-            };
-
-            browser._popup.MouseWheel += (sender, arg) =>
-            {
-                try
-                {
-                    if (_browserHost != null)
-                    {
-                        Point cursorPos = arg.GetPosition(this);
-                        int delta = arg.Delta;
-                        CefMouseEvent mouseEvent = new CefMouseEvent()
-                        {
-                            X = (int)cursorPos.X,
-                            Y = (int)cursorPos.Y
-                        };
-
-                        mouseEvent.Modifiers = GetMouseModifiers();
-                        _browserHost.SendMouseWheelEvent(mouseEvent, 0, delta);
-
-                        //_logger.Debug(string.Format("MouseWheel: ({0},{1})", cursorPos.X, cursorPos.Y));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.ErrorException("WpfCefBrowser: Caught exception in Popup.MouseWheel()", ex);
-                }
-            };*/
-        }
-
-        internal bool OnTooltip(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                // _tooltipTimer.Stop();
-                UpdateTooltip(null);
-            }
-            else
-            {
-                /*   _tooltipTimer.Tick += (sender, args) => UpdateTooltip(text);
-                   _tooltipTimer.Start();*/
-            }
-
-            return true;
         }
 
         public event LoadStartEventHandler LoadStart;
@@ -1607,12 +1485,14 @@ namespace CefGlue.Avalonia
         public event BrowserCreatedHandler BrowserCreated;
 
         public static event EventHandler WebKitInitialized;
+
         public static void OnWebKitInitialized(object sender, EventArgs e)
         {
             WebKitInitialized?.Invoke(sender, e);
         }
 
         public static event RegisterCustomSchemesHandler RegisterCustomSchemes;
+
         public static void OnRegisterCustomSchemes(object sender, RegisterCustomSchemesEventArgs e)
         {
             RegisterCustomSchemes?.Invoke(sender, e);
@@ -1620,23 +1500,21 @@ namespace CefGlue.Avalonia
 
         internal void OnLoadStart(CefFrame frame)
         {
-            if (this.LoadStart != null)
+            if (LoadStart != null)
             {
                 var e = new LoadStartEventArgs(frame);
-                this.LoadStart(this, e);
+                LoadStart(this, e);
             }
         }
 
         internal void OnLoadEnd(CefFrame frame, int httpStatusCode)
         {
-            if (this.LoadEnd != null)
+            if (LoadEnd != null)
             {
                 var e = new LoadEndEventArgs(frame, httpStatusCode);
-                this.LoadEnd(this, e);
+                LoadEnd(this, e);
             }
         }
-
-        private object _scriptLock = new object();
 
         public async Task<string> ExecuteScriptAsync(string code, string scriptUrl = null)
         {
@@ -1646,119 +1524,84 @@ namespace CefGlue.Avalonia
 
             _messageReceiveCompletionSource = new TaskCompletionSource<string>();
 
-            _browser.SendProcessMessage(CefProcessId.Renderer, message);
+            Browser.SendProcessMessage(CefProcessId.Renderer, message);
 
             await _messageReceiveCompletionSource.Task;
 
-            var messageReceived = _messageReceiveCompletionSource.Task.Result;
-
-            return messageReceived;
+            return _messageReceiveCompletionSource.Task.Result;
         }
 
         internal void OnLoadingStateChange(bool isLoading, bool canGoBack, bool canGoForward)
         {
-            if (this.LoadingStateChange != null)
+            if (LoadingStateChange != null)
             {
                 var e = new LoadingStateChangeEventArgs(isLoading, canGoBack, canGoForward);
-                this.LoadingStateChange(this, e);
+                LoadingStateChange(this, e);
             }
         }
+
         internal void OnLoadError(CefFrame frame, CefErrorCode errorCode, string errorText, string failedUrl)
         {
-            if (this.LoadError != null)
+            if (LoadError != null)
             {
                 var e = new LoadErrorEventArgs(frame, errorCode, errorText, failedUrl);
-                this.LoadError(this, e);
+                LoadError(this, e);
             }
-        }
-
-        private void UpdateTooltip(string text)
-        {
-            Dispatcher.UIThread.InvokeAsync(
-                    () =>
-                    {
-                        if (string.IsNullOrEmpty(text))
-                        {
-                            //_tooltip.IsOpen = false;
-                        }
-                        else
-                        {
-                            //_tooltip.Placement = PlacementMode.Mouse;
-                            _tooltip.Content = text;
-                            //_tooltip.IsOpen = true;
-                            //_tooltip.Visibility = Visibility.Visible;
-                        }
-                    });
-
-            //_tooltipTimer.Stop();
         }
 
         public void HandleAfterCreated(CefBrowser browser)
         {
             int width = 0, height = 0;
 
-            bool hasAlreadyBeenInitialized = false;
+            var hasAlreadyBeenInitialized = false;
 
-            //Dispatcher.UIThread.InvokeTaskAsync(() =>
+
+            if (Browser != null)
             {
-                if (_browser != null)
-                {
-                    hasAlreadyBeenInitialized = true;
-                }
-                else
-                {
-                    _browser = browser;
-                    _browserHost = _browser.GetHost();
+                hasAlreadyBeenInitialized = true;
+            }
+            else
+            {
+                Browser = browser;
+                _browserHost = Browser.GetHost();
+                width = _browserWidth;
+                height = _browserHeight;
+            }
 
-                    // _browserHost.SetFocus(IsFocused);
-
-                    width = (int)_browserWidth;
-                    height = (int)_browserHeight;
-                }
-            }//);
 
             // Make sure we don't initialize ourselves more than once. That seems to break things.
             if (hasAlreadyBeenInitialized)
+            {
                 return;
+            }
 
             if (width > 0 && height > 0)
+            {
                 _browserHost.WasResized();
+            }
 
-            // 			mainUiDispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
-            // 			{
-            // 				if (!string.IsNullOrEmpty(this.initialUrl))
-            // 				{
-            // 					NavigateTo(this.initialUrl);
-            // 					this.initialUrl = string.Empty;
-            // 				}
-            // 			}));
-
-            this.BrowserCreated?.Invoke(this, new BrowserCreatedEventArgs(browser));
+            BrowserCreated?.Invoke(this, new BrowserCreatedEventArgs(browser));
         }
 
         internal bool GetViewRect(ref CefRectangle rect)
         {
-            bool rectProvided = false;
-            CefRectangle browserRect = new CefRectangle();
+            var rectProvided = false;
+            var browserRect = new CefRectangle();
 
-            // TODO: simplify this
-            //_mainUiDispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
-            //{
             try
             {
                 // The simulated screen and view rectangle are the same. This is necessary
                 // for popup menus to be located and sized inside the view.
                 browserRect.X = browserRect.Y = 0;
-                browserRect.Width = (int)_browserWidth;
-                browserRect.Height = (int)_browserHeight;
+                browserRect.Width = _browserWidth;
+                browserRect.Height = _browserHeight;
 
                 rectProvided = true;
             }
-            catch (Exception ex)
+            catch
             {
                 rectProvided = false;
             }
-            //}));
 
             if (rectProvided)
             {
@@ -1770,144 +1613,73 @@ namespace CefGlue.Avalonia
 
         internal void GetScreenPoint(int viewX, int viewY, ref int screenX, ref int screenY)
         {
-            PixelPoint ptScreen = new PixelPoint();
+            var ptScreen = new PixelPoint();
 
-            //Dispatcher.UIThread.InvokeAsync(()=>
+
+            try
             {
-                try
-                {
-                    Point ptView = new Point(viewX, viewY);
-                    ptScreen = this.PointToScreen(ptView);
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }//);
+                var ptView = new Point(viewX, viewY);
+                ptScreen = this.PointToScreen(ptView);
+            }
+            catch
+            {
+            }
 
             screenX = ptScreen.X;
             screenY = ptScreen.Y;
         }
 
-        internal void HandleViewPaint(CefBrowser browser, CefPaintElementType type, CefRectangle[] dirtyRects, IntPtr buffer, int width, int height)
+        internal void HandleViewPaint(CefBrowser browser, CefPaintElementType type, CefRectangle[] dirtyRects,
+            IntPtr buffer, int width, int height)
         {
             // When browser size changed - we just skip frame updating.
             // This is dirty precheck to do not do Invoke whenever is possible.
-            if (_browserSizeChanged && (width != _browserWidth || height != _browserHeight)) return;
-
-            //Dispatcher.UIThread.InvokeAsync(()=>
-            {
-                // Actual browser size changed check.
-                if (_browserSizeChanged && (width != _browserWidth || height != _browserHeight)) return;
-
-                try
-                {
-                    if (_browserSizeChanged)
-                    {
-                        _browserPageBitmap = new WriteableBitmap(new PixelSize((int)_browserWidth, (int)_browserHeight), new Vector(96, 96), PixelFormat.Bgra8888);//new WriteableBitmap((int)_browserWidth, (int)_browserHeight, 96, 96, AllowsTransparency ? PixelFormats.Bgra32 : PixelFormats.Bgr32, null);
-                        _browserPageImage.Source = _browserPageBitmap;
-
-                        _browserSizeChanged = false;
-                    }
-
-                    if (_browserPageBitmap != null)
-                    {
-                        DoRenderBrowser(_browserPageBitmap, width, height, dirtyRects, buffer);
-
-                        _browserPageImage.InvalidateVisual();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                }
-            }//);
-        }
-
-        internal void HandlePopupPaint(int width, int height, CefRectangle[] dirtyRects, IntPtr sourceBuffer)
-        {
-            if (width == 0 || height == 0)
+            if (_browserSizeChanged && (width != _browserWidth || height != _browserHeight))
             {
                 return;
             }
 
-            Dispatcher.UIThread.InvokeAsync(() =>
-                    {
-                        int stride = width * 4;
-                        int sourceBufferSize = stride * height;
 
-                        foreach (CefRectangle dirtyRect in dirtyRects)
-                        {
-                            if (dirtyRect.Width == 0 || dirtyRect.Height == 0)
-                            {
-                                continue;
-                            }
+            if (_browserSizeChanged && (width != _browserWidth || height != _browserHeight))
+            {
+                return;
+            }
 
-                            int adjustedWidth = dirtyRect.Width;
+            try
+            {
+                if (_browserSizeChanged)
+                {
+                    _browserPageBitmap = new WriteableBitmap(
+                        new PixelSize(_browserWidth, _browserHeight),
+                        new Vector(96, 96),
+                        PixelFormat.Bgra8888);
 
-                            int adjustedHeight = dirtyRect.Height;
+                    _browserPageImage.Source = _browserPageBitmap;
+                    _browserSizeChanged = false;
+                }
 
-                            Rect sourceRect = new Rect(dirtyRect.X, dirtyRect.Y, adjustedWidth, adjustedHeight);
-
-                            // _popupImageBitmap.WritePixels(sourceRect, sourceBuffer, sourceBufferSize, stride, dirtyRect.X, dirtyRect.Y);
-                        }
-                    });
+                DoRenderBrowser(_browserPageBitmap, width, height, buffer);
+                _browserPageImage.InvalidateVisual();
+            }
+            catch
+            {
+            }
         }
 
-        private void DoRenderBrowser(WriteableBitmap bitmap, int browserWidth, int browserHeight, CefRectangle[] dirtyRects, IntPtr sourceBuffer)
+        private static void DoRenderBrowser(WriteableBitmap bitmap, int browserWidth, int browserHeight,
+            IntPtr sourceBuffer)
         {
-            int stride = browserWidth * 4;
-            int sourceBufferSize = stride * browserHeight;
+            var stride = browserWidth * 4;
+            var sourceBufferSize = stride * browserHeight;
 
             if (browserWidth == 0 || browserHeight == 0)
             {
                 return;
             }
 
-            foreach (CefRectangle dirtyRect in dirtyRects)
-            {
-                if (dirtyRect.Width == 0 || dirtyRect.Height == 0)
-                {
-                    continue;
-                }
-
-                // If the window has been resized, make sure we never try to render too much
-                int adjustedWidth = (int)dirtyRect.Width;
-                //if (dirtyRect.X + dirtyRect.Width > (int) bitmap.Width)
-                //{
-                //    adjustedWidth = (int) bitmap.Width - (int) dirtyRect.X;
-                //}
-
-                int adjustedHeight = (int)dirtyRect.Height;
-                //if (dirtyRect.Y + dirtyRect.Height > (int) bitmap.Height)
-                //{
-                //    adjustedHeight = (int) bitmap.Height - (int) dirtyRect.Y;
-                //}
-
-                // Update the dirty region
-                var sourceRect = new Rect((int)dirtyRect.X, (int)dirtyRect.Y, adjustedWidth, adjustedHeight);
-
-
-                //bitmap.WritePixels(sourceRect, sourceBuffer, sourceBufferSize, stride, (int)dirtyRect.X, (int)dirtyRect.Y);
-
-                // 			int adjustedWidth = browserWidth;
-                // 			if (browserWidth > (int)bitmap.Width)
-                // 				adjustedWidth = (int)bitmap.Width;
-                // 
-                // 			int adjustedHeight = browserHeight;
-                // 			if (browserHeight > (int)bitmap.Height)
-                // 				adjustedHeight = (int)bitmap.Height;
-                // 
-                // 			int sourceBufferSize = browserWidth * browserHeight * 4;
-                // 			int stride = browserWidth * 4;
-                // 
-                // 			Int32Rect sourceRect = new Int32Rect(0, 0, adjustedWidth, adjustedHeight);
-                // 			bitmap.WritePixels(sourceRect, sourceBuffer, sourceBufferSize, stride, 0, 0);
-            }
-
             using (var l = bitmap.Lock())
             {
-                byte[] managedArray = new byte[sourceBufferSize];
+                var managedArray = new byte[sourceBufferSize];
 
                 Marshal.Copy(sourceBuffer, managedArray, 0, sourceBufferSize);
 
@@ -1915,20 +1687,14 @@ namespace CefGlue.Avalonia
             }
         }
 
-        byte count = 0;
+        //internal void OnPopupShow(bool show)
+        //{
+        //    if (_popup == null)
+        //    {
+        //        return;
+        //    }
 
-        internal void OnPopupShow(bool show)
-        {
-            if (_popup == null)
-            {
-                return;
-            }
-
-            Dispatcher.UIThread.InvokeAsync(() => _popup.IsOpen = show);
-        }
-
-
+        //    Dispatcher.UIThread.InvokeAsync(() => _popup.IsOpen = show);
+        //}
     }
 }
-
-

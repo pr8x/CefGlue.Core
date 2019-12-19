@@ -1,13 +1,16 @@
-﻿<Window x:Class="Xilium.CefGlue.WPF.WpfCefJSPrompt"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="https://github.com/avaloniaui"
+        x:Class="Xilium.CefGlue.Avalonia.AvaloniaCefJSPrompt"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="JavaScript Prompt" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+        Title="JavaScript Prompt" SizeToContent="WidthAndHeight" Topmost="True"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
     <Grid>
         <DockPanel>
             <Grid DockPanel.Dock="Bottom" Background="WhiteSmoke">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button DockPanel.Dock="Bottom" Content="Ok" Margin="10" Height="23" HorizontalAlignment="Right" Width="80" Click="OkButton_Click" />
-                    <Button DockPanel.Dock="Bottom" Content="Cancel" Margin="0,10,10,10" Height="23" HorizontalAlignment="Right" Width="80" Click="CancelButton_Click" />
+                    <Button DockPanel.Dock="Bottom" Content="Ok" Margin="10" Height="23" HorizontalAlignment="Right"
+                            Width="80" PointerPressed="OkButton_Click" />
+                    <Button DockPanel.Dock="Bottom" Content="Cancel" Margin="0,10,10,10" Height="23"
+                            HorizontalAlignment="Right" Width="80" PointerPressed="CancelButton_Click" />
                 </StackPanel>
             </Grid>
             <Grid DockPanel.Dock="Top" MinHeight="90" MinWidth="220">
